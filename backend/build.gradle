@@ -18,20 +18,20 @@ repositories {
 	mavenCentral()
 }
 
-def webappDir = "$projectDir/../frontend"
+//def webappDir = "$projectDir/../frontend"
+//
+//task appNpmInstall(type: NpmTask) {
+//	workingDir = file("${webappDir}")
+//	args = ["run", "build"]
+//}
+//
+//task copyWebApp(type: Copy) {
+//	from 'frontend/build'
+//	into "build/resources/main/static"
+//}
 
-task appNpmInstall(type: NpmTask) {
-	workingDir = file("${webappDir}")
-	args = ["run", "build"]
-}
-
-task copyWebApp(type: Copy) {
-	from 'frontend/build'
-	into "build/resources/main/static"
-}
-
-copyWebApp.dependsOn(appNpmInstall)
-compileJava.dependsOn(copyWebApp)
+//copyWebApp.dependsOn(appNpmInstall)
+//compileJava.dependsOn(copyWebApp)
 
 dependencies {
 //	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
