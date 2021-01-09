@@ -1,8 +1,33 @@
+buildscript {
+	ext {
+		springBootVersion = '2.4.1'
+		mooworkVersion = '1.2.0'
+	}
+	repositories {
+		mavenCentral()
+		maven {
+			url "https://plugins.gradle.org/m2/"
+		}
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath("com.moowork.gradle:gradle-node-plugin:${mooworkVersion}")
+		classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.8.2'
+	}
+}
+
 plugins {
 	id 'org.springframework.boot' version '2.4.1'
 	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
 	id 'java'
 }
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'com.moowork.node'
+apply plugin: 'com.github.kt3k.coveralls'
+apply plugin: 'jacoco'
 
 group = 'com.project827'
 version = '0.0.1-SNAPSHOT'
@@ -33,44 +58,37 @@ dependencies {
 	}
 }
 
-def webappDir = "$projectDir/src/main/frontend"
+def webappDir = "$projectDir/frontend"
 
-sourceSets {
-	main {
-		resources {
-			srcDirs = ["$webappDir/build", "$projectDir/src/main/resources"]
-		}
-	}
+// node 버전 및 npm, node 설치파일 저장 디렉토리 명시
+node {
+	version = '14.15.4'
+	download= false
+	workDir = file("${project.buildDir}/nodejs")
+	npmWorkDir=file("${project.buildDir}/npm")
 }
 
-processResources {
-	dependsOn "buildReact"
+// npm install 과정
+task appNpmInstall(type: NpmTask) {
+	workingDir = file("${project.projectDir}/frontend")
+	args = ["install"]
 }
 
-task buildReact(type: Exec) {
-	dependsOn "installReact"
-	workingDir "$webappDir"
-	inputs.dir "$webappDir"
-	group = BasePlugin.BUILD_GROUP
-	if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
-		commandLine "npm.cmd", "run-script", "build"
-	} else {
-		commandLine "npm", "run-script", "build"
-	}
+// npm build
+task npmBuild(type: NpmTask) {
+	workingDir = file("${project.projectDir}/frontend")
+	args = ['build']
 }
 
-task installReact(type: Exec) {
-	workingDir "$webappDir"
-	inputs.dir "$webappDir"
-	group = BasePlugin.BUILD_GROUP
-	if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
-		commandLine "npm.cmd", "audit", "fix"
-		commandLine 'npm.cmd', 'install'
-	} else {
-		commandLine "npm", "audit", "fix"
-		commandLine 'npm', 'install'
-	}
+// 빌드된 결과 resources로 이동
+task copyWebApp(type: Copy) {
+	from "frontend/build"
+	into 'build/resources/main/static/.'
 }
+
+npmBuild.dependsOn appNpmInstall
+copyWebApp.dependsOn npmBuild
+compileJava.dependsOn copyWebApp
 
 test {
 	useJUnitPlatform()
