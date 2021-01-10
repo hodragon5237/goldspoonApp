@@ -23,24 +23,22 @@ export default class HeaderLayout extends Component {
 
     return (
       <Wrapper>
-        <Segment inverted>
-          <Menu pointing secondary inverted>
-            <Menu.Item
-              link
-              active={activeItem === 'home'}
-              onClick={this.handleItemClick}
-            >
-              <Link to="/">HOME</Link>
-            </Menu.Item>
-            <Menu.Item
-              link
-              active={activeItem === 'TM'}
-              onClick={this.handleItemClick}
-            >
-              <Link to="/orderMap">OrderMapView</Link>
-            </Menu.Item>
-          </Menu>
-        </Segment>
+        <Menu pointing secondary>
+          <Menu.Item
+            link
+            active={activeItem === 'home'}
+            onClick={this.handleItemClick}
+          >
+            <Link to="/">HOME</Link>
+          </Menu.Item>
+          <Menu.Item
+            link
+            active={activeItem === 'goldspoon'}
+            onClick={this.handleItemClick}
+          >
+            <Link to="/goldspoon">GOLDSPOON</Link>
+          </Menu.Item>
+        </Menu>
       </Wrapper>
     )
   }

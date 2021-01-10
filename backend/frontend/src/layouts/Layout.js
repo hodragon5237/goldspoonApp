@@ -1,6 +1,19 @@
   
 import React from 'react';
-import { Container, Divider, Icon } from 'semantic-ui-react';
+import {
+  Button,
+  Container,
+  Divider,
+  Grid,
+  Header,
+  Icon,
+  Image,
+  List,
+  Menu,
+  Segment,
+  Sidebar,
+  Visibility,
+} from 'semantic-ui-react'
 
 import styled from 'styled-components';
 
@@ -9,6 +22,8 @@ import FooterLayout from './Footer';
 
 const Wrapper = styled.div`
   padding-top: 0px;
+  marginTop: '7em';
+  height: 80%;
 `;
 
 const Layout = ({ children }) => {
