@@ -23,6 +23,8 @@ backend/frontend/yarn-debug.log*
 backend/frontend/yarn-error.log*
 backend/frontend/package-lock.json
 
+backend/frontend/.eslintcache
+
 ##backend
 backend/.gradle
 backend/build
