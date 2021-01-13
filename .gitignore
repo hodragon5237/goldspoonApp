@@ -26,3 +26,4 @@ backend/frontend/package-lock.json
 ##backend
 backend/.gradle
 backend/build
+backend/frontend/.eslintcache
