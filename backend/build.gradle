@@ -65,7 +65,7 @@ node {
 	version = '14.15.4'
 	download= false
 	workDir = file("${project.buildDir}/nodejs")
-	npmWorkDir=file("${project.buildDir}/npm")
+	npmWorkDir = file("${project.buildDir}/npm")
 }
 
 // npm install 과정
@@ -77,7 +77,7 @@ task appNpmInstall(type: NpmTask) {
 // npm build
 task npmBuild(type: NpmTask) {
 	workingDir = file("${project.projectDir}/frontend")
-	args = ['build']
+	args = ['run-script', 'build']
 }
 
 // 빌드된 결과 resources로 이동

@@ -1,24 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+/* src/App.js */
+import React, { useState, useEffect } from 'react';
+import { Switch, BrowserRouter as Router, Route } from 'react-router-dom';
+
+import AuthRoute from './routes/AuthRoute';
+
+import Home from './components/Home/Home';
+import GoldSpoon from './components/GoldSpoon/GoldSpoon';
+import LoginForm from './components/Login/Login';
+import FileNotFound from './components/FileNotFound/FileNotFound';
 
 function App() {
+
+  const [user, setUser] = useState(null);
+  const authenticated = user != null;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Switch>
+        <Route
+          exact path="/"
+          component={ Home }
+        />
+        <AuthRoute
+          authenticated={authenticated}
+          exact path="/goldspoon"
+          component={ GoldSpoon }
+        />
+        <Route
+          exact path="/login"
+          component={ LoginForm }
+        />
+        <Route component={ FileNotFound }/>
+      </Switch>
+    </Router>
   );
 }
 
