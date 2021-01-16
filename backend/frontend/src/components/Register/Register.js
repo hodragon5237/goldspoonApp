@@ -3,13 +3,13 @@ import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui
 
 import Layout from '../../layouts/Layout';
 
-const LoginForm = () => (
+const Register = () => (
   <Layout>
     <Layout.Main>
         <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
             <Grid.Column style={{ maxWidth: 450 }}>
             <Header as='h2' color='teal' textAlign='center'>
-                로그인
+                회원가입
             </Header>
             <Form size='large'>
                 <Segment stacked>
@@ -23,13 +23,10 @@ const LoginForm = () => (
                 />
 
                 <Button color='teal' fluid size='large'>
-                    Login
+                    Register
                 </Button>
                 </Segment>
             </Form>
-            <Message>
-                New to us? <a href='/register'>Sign Up</a>
-            </Message>
             </Grid.Column>
         </Grid>
     </Layout.Main>
@@ -37,4 +34,4 @@ const LoginForm = () => (
 
 )
 
-export default LoginForm
+export default Register

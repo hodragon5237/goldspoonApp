@@ -7,6 +7,7 @@ import AuthRoute from './routes/AuthRoute';
 import Home from './components/Home/Home';
 import GoldSpoon from './components/GoldSpoon/GoldSpoon';
 import LoginForm from './components/Login/Login';
+import Register from './components/Register/Register';
 import FileNotFound from './components/FileNotFound/FileNotFound';
 
 function App() {
@@ -29,6 +30,10 @@ function App() {
         <Route
           exact path="/login"
           component={ LoginForm }
+        />
+        <Route
+          exact path="/register"
+          component={ Register }
         />
         <Route component={ FileNotFound }/>
       </Switch>
