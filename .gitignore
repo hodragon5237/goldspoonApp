@@ -4,6 +4,7 @@
 backend/frontend/node_modules
 backend/frontend/.pnp
 backend/frontend/.pnp.js
+backend/frontend/.eslintcache
 
 # testing
 backend/frontend/coverage

@@ -23,12 +23,12 @@ const LoginForm = () => (
                 />
 
                 <Button color='teal' fluid size='large'>
-                    Login
+                    로그인
                 </Button>
                 </Segment>
             </Form>
             <Message>
-                New to us? <a href='/register'>Sign Up</a>
+                아직 회원이 아니신가요? <a href='/register'>회원 가입</a>
             </Message>
             </Grid.Column>
         </Grid>

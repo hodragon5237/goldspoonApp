@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @Component
 public class CrudController <Req, Res, Entity> implements CrudInterface<Req, Res>{
     
-    @Autowired(required = false)
+    @Autowired
     protected BaseService<Req,Res,Entity> baseService;
 
     @Override

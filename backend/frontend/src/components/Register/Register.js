@@ -23,7 +23,7 @@ const Register = () => (
                 />
 
                 <Button color='teal' fluid size='large'>
-                    Register
+                    회원 가입
                 </Button>
                 </Segment>
             </Form>
