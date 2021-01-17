@@ -27,5 +27,9 @@ public class AccountApiRequest {
     private LocalDateTime registeredAt;
 
     private LocalDateTime unregisteredAt;
+
+    private LocalDateTime createdAt;
+
+    private LocalDateTime updatedAt;
     
 }

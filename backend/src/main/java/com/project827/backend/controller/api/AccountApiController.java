@@ -5,11 +5,15 @@ import com.project827.backend.model.entity.Account;
 import com.project827.backend.model.network.request.AccountApiRequest;
 import com.project827.backend.model.network.response.AccountApiResponse;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 @RequestMapping("/api/account")
+@RequiredArgsConstructor
 public class AccountApiController extends CrudController<AccountApiRequest, AccountApiResponse, Account>{
     
 }
