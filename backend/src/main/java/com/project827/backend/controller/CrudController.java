@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 @Component
-public class CrudController <Req, Res, Entity> implements CrudInterface<Req, Res>{
+public abstract class CrudController <Req, Res, Entity> implements CrudInterface<Req, Res>{
     
     @Autowired(required = false)
     protected BaseService<Req,Res,Entity> baseService;
@@ -34,7 +34,7 @@ public class CrudController <Req, Res, Entity> implements CrudInterface<Req, Res
 
     @Override
     @DeleteMapping("{id}")
-    public Header delete(Long id) {
+    public Header delete(@PathVariable Long id) {
         return baseService.delete(id);
     }
 }
