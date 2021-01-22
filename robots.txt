@@ -1,0 +1,4 @@
+User-Agent:*
+Allow: /
+
+sitemap: flamboyant-hodgkin-f24c95.netlify.app/sitemap.xml
