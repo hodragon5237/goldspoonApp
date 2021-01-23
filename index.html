@@ -79,32 +79,36 @@
                 </a>
                 <script type='text/javascript'>
                 Kakao.init('a1e68ec968e7af64917f2eedd515c9d4');
-                Kakao.Link.createDefaultButton({
-                    container : '#kakao-link-btn',
-                    objectType : 'feed',
-                    content:{
-                        title: '재미로 보는 관상 테스트',
-                        description: '나의 재물운은 얼마나 될까?',
-                        imageUrl: '/favicon.ico',
-                        link: {
-                            mobileWebUrl: window.location.href,
-                            webUrl: window.location.href
-                        }
-                    },
-                    social: {
-                        likeCount:10,
-                        commentCount: 20,
-                        sharedCount: 30
-                    },
-                    buttons: [
-                        {
-                            title: '웹으로 보기',
-                            link: {
-                                webUrl:window.location.href
-                            }
-                        }
-                    ]
-                });
+                Kakao.Link.createScrapButton({
+                    container: '#kakao-link-btn',
+                    requestUrl: document.URL
+                })  
+                // Kakao.Link.createDefaultButton({
+                //     container : '#kakao-link-btn',
+                //     objectType : 'feed',
+                //     content:{
+                //         title: '재미로 보는 관상 테스트',
+                //         description: '나의 재물운은 얼마나 될까?',
+                //         imageUrl: '/favicon.ico',
+                //         link: {
+                //             mobileWebUrl: window.location.href,
+                //             webUrl: window.location.href
+                //         }
+                //     },
+                //     social: {
+                //         likeCount:10,
+                //         commentCount: 20,
+                //         sharedCount: 30
+                //     },
+                //     buttons: [
+                //         {
+                //             title: '웹으로 보기',
+                //             link: {
+                //                 webUrl:window.location.href
+                //             }
+                //         }
+                //     ]
+                // });
                 </script>
                 <!-- Go to www.addthis.com/dashboard to customize your tools -->
                 <!-- <div class="addthis_inline_share_toolbox"></div> -->
