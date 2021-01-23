@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="style.css">
     <title>GoldSpoon</title>
     <!-- Go to www.addthis.com/dashboard to customize your tools -->
-    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5feeb9fd50ff91f7"></script>
+    <!-- <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5feeb9fd50ff91f7"></script> -->
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
@@ -72,9 +72,42 @@
                 <div class="image-title-wrap">
                     <button type="button" onclick="removeUpload()" class="remove-image">다른 사진으로 다시 시도</button>
                 </div>
-                <a id="kakao-link" href="javascript:sendLink()">카카오톡 공유</a>
+                <a id="kakao-link-btn" href="javascript:sendLink()">
+                    <img
+                      src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"
+                    />
+                </a>
+                <script type='text/javascript'>
+                Kakao.init('a1e68ec968e7af64917f2eedd515c9d4');
+                Kakao.Link.createDefaultButton({
+                    container : '#kakao-link-btn',
+                    objectType : 'feed',
+                    content:{
+                        title: '재미로 보는 관상 테스트',
+                        description: '나의 재물운은 얼마나 될까?',
+                        imageUrl: '/favicon.ico',
+                        link: {
+                            mobileWebUrl: window.location.href,
+                            webUrl: window.location.href
+                        }
+                    },
+                    social: {
+                        likeCount:10,
+                        commentCount: 20,
+                        sharedCount: 30
+                    },
+                    buttons: [
+                        {
+                            title: '웹으로 보기',
+                            link: {
+                                webUrl:window.location.href
+                            }
+                        }
+                    ]
+                });
+                </script>
                 <!-- Go to www.addthis.com/dashboard to customize your tools -->
-                <div class="addthis_inline_share_toolbox"></div>
+                <!-- <div class="addthis_inline_share_toolbox"></div> -->
             </div>
         </div>
         <div class="ad-banner">
@@ -230,36 +263,6 @@
             $('#probability-container').attr('style', "width:"+prediction[0].probability.toFixed(2)*100+"%");
         }
     </script>
-    <script type='text/javascript'>
-    KaKao.init('a1e68ec968e7af64917f2eedd515c9d4');
-    Kakao.Link.createScrapButton({
-        container : '#kakao-link',
-        objectType : 'feed',
-        content:{
-            title: '재미로 보는 관상 테스트',
-            description: '나의 재물운은 얼마나 될까?',
-            imageUrl: '/favicon.ico',
-            link: {
-                mobileWebUrl: window.location.href,
-                webUrl: window.location.href
-            }
-        },
-        social: {
-            likeCount:10,
-            commentCount: 20,
-            sharedCount: 30
-        },
-        buttons: [
-            {
-                title: '웹으로 보기',
-                link: {
-                    webUrl:window.location.href
-                }
-            }
-        ]
-    });
-    </script>
-
 </body>
 <!-- Copyright (c) 2020 by Aaron Vanston (https://codepen.io/aaronvanston/pen/yNYOXR)
 
