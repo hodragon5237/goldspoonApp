@@ -1,6 +1,7 @@
 package com.project827.backend.model.entity;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 
 import javax.persistence.*;
 
@@ -12,6 +13,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import lombok.*;
 import lombok.experimental.Accessors;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Data
 @AllArgsConstructor
@@ -46,5 +49,4 @@ public class Account {
 
     @LastModifiedDate
     private LocalDateTime updatedAt;
-    
 }
