@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.project827.backend.exception.UserDuplicatedException;
 import com.project827.backend.model.entity.Account;
 import com.project827.backend.model.enumclass.AccountStatus;
 import com.project827.backend.model.network.Header;
@@ -33,8 +34,14 @@ public class AccountApiLogicService extends BaseService<AccountApiRequest, Accou
     AccountRepository accountRepository;
 
     @Override
-    public Header<AccountApiResponse> create(Header<AccountApiRequest> request) {
+    public Header<AccountApiResponse> create(Header<AccountApiRequest> request) throws UserDuplicatedException {
         AccountApiRequest accountApiRequest = request.getData();
+
+        Optional<Account> optional = accountRepository.findByEmail(accountApiRequest.getEmail());
+
+        if (optional.isPresent()) {
+            throw new UserDuplicatedException();
+        }
 
         Account account = Account.builder()
                         .email(accountApiRequest.getEmail())
