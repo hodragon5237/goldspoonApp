@@ -23,7 +23,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class UserService implements UserDetailsService {
+public class UserService {
 
     @Autowired
     private AccountRepository accountRepository;
@@ -46,18 +46,7 @@ public class UserService implements UserDetailsService {
         }
     }
 
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<Account> optional = accountRepository.findByName(username);
-        Account account = optional.get();
-
-        List<GrantedAuthority> authorities = new ArrayList<>();
-
-        if (account != null) {
-            authorities.add(new SimpleGrantedAuthority(RoleType.MEMBER.getValue()));
-        }
-
-        return new User(account.getName(), account.getPassword(), authorities);
+    public Optional<Account> loadUserByUsername(String username) throws UsernameNotFoundException {
+        return accountRepository.findByName(username);
     }
 }

@@ -1,5 +1,6 @@
 package com.project827.backend.controller;
 
+import com.project827.backend.exception.UserDuplicatedException;
 import com.project827.backend.ifs.CrudInterface;
 import com.project827.backend.model.network.Header;
 import com.project827.backend.service.BaseService;
@@ -16,7 +17,7 @@ public abstract class CrudController <Req, Res, Entity> implements CrudInterface
 
     @Override
     @PostMapping("")
-    public Header<Res> create(@RequestBody Header<Req> request) {
+    public Header<Res> create(@RequestBody Header<Req> request) throws UserDuplicatedException {
         return baseService.create(request);
     }
 
