@@ -5,6 +5,20 @@
                 <img src="img/brand/white.png" alt="logo">
             </router-link>
 
+            
+            <!-- 메뉴 layout -->
+            <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
+                <base-dropdown tag="li" class="nav-item">
+                    <a slot="title" href="#" class="nav-link" data-toggle="dropdown" role="button">
+                        <i class="ni ni-collection d-lg-none"></i>
+                        <span class="nav-link-inner--text">Examples</span>
+                    </a>
+                    <router-link to="/landing" class="dropdown-item">Landing</router-link>
+                    <router-link to="/profile" class="dropdown-item">Profile</router-link>
+                    <router-link to="/login" class="dropdown-item">Login</router-link>
+                    <router-link to="/register" class="dropdown-item">Register</router-link>
+                </base-dropdown>
+            </ul>
             <ul class="navbar-nav align-items-lg-center ml-lg-auto">
                 <li class="nav-item">
                     <a class="nav-link nav-link-icon" href="https://www.facebook.com/creativetim" target="_blank" rel="noopener"
@@ -37,10 +51,17 @@
                 <li class="nav-item d-none d-lg-block ml-lg-4">
                     <a href="https://www.creative-tim.com/product/vue-argon-design-system" target="_blank" rel="noopener"
                        class="btn btn-neutral btn-icon">
-                <span class="btn-inner--icon">
-                  <i class="fa fa-cloud-download mr-2"></i>
-                </span>
-                        <span class="nav-link-inner--text">Download</span>
+                        <span class="nav-link-inner--text">
+                            <router-link to="/login" class="dropdown-item">로그인</router-link>
+                        </span>
+                    </a>
+                </li>
+                <li class="nav-item d-none d-lg-block ml-lg-4">
+                    <a href="https://www.creative-tim.com/product/vue-argon-design-system" target="_blank" rel="noopener"
+                       class="btn btn-neutral btn-icon">
+                        <span class="nav-link-inner--text">
+                            <router-link to="/register" class="dropdown-item">회원가입</router-link>
+                        </span>
                     </a>
                 </li>
             </ul>

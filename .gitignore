@@ -45,5 +45,6 @@ backend/frontend/.eslintcache
 
 ##backend
 backend/.gradle
+backend/.idea/gradle
 backend/build
 backend/frontend/.eslintcache
