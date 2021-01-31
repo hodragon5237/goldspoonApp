@@ -4,6 +4,24 @@
 backend/frontend/node_modules
 backend/frontend/.pnp
 backend/frontend/.pnp.js
+backend/frontend/.eslintcache
+
+frontend/node_modules/
+frontend/.pnp
+frontend/.pnp.js
+frontend/.eslintcache
+frontend/build/
+
+frontend/.DS_Store
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/package-lock.json
 
 # testing
 backend/frontend/coverage
@@ -27,5 +45,6 @@ backend/frontend/.eslintcache
 
 ##backend
 backend/.gradle
+backend/.idea/gradle
 backend/build
 backend/frontend/.eslintcache

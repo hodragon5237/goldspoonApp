@@ -9,7 +9,7 @@ const LoginForm = () => (
         <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
             <Grid.Column style={{ maxWidth: 450 }}>
             <Header as='h2' color='teal' textAlign='center'>
-                <Image src='/logo.png' /> Log-in to your account
+                로그인
             </Header>
             <Form size='large'>
                 <Segment stacked>
@@ -23,12 +23,12 @@ const LoginForm = () => (
                 />
 
                 <Button color='teal' fluid size='large'>
-                    Login
+                    로그인
                 </Button>
                 </Segment>
             </Form>
             <Message>
-                New to us? <a href='#'>Sign Up</a>
+                아직 회원이 아니신가요? <a href='/register'>회원 가입</a>
             </Message>
             </Grid.Column>
         </Grid>
