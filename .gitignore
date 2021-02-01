@@ -30,3 +30,4 @@ backend/frontend/.eslintcache
 backend/.gradle
 backend/build
 backend/frontend/.eslintcache
+frontend/.browserslistrc
