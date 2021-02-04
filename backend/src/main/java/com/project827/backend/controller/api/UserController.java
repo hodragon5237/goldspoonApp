@@ -2,14 +2,21 @@ package com.project827.backend.controller.api;
 
 import com.project827.backend.dto.AccountDto;
 import com.project827.backend.model.entity.Account;
+import com.project827.backend.model.entity.UserDetailsImpl;
+import com.project827.backend.model.security.JwtResponse;
 import com.project827.backend.service.AccountApiLogicService;
 import com.project827.backend.service.UserService;
+import com.project827.backend.utils.JwtUtils;
 import com.project827.backend.utils.Sessions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,26 +25,47 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/user")
-public class UserController {
+public class UserController implements UserDetailsService {
 
     @Autowired
     private UserService userService;
 
+    @Autowired
+    AuthenticationManager authenticationManager;
+
+    @Autowired
+    JwtUtils jwtUtils;
+
     @PostMapping("/login")
-    public RedirectView loginChecker(@RequestBody AccountDto accountDto, HttpServletRequest request) {
+    public ResponseEntity loginChecker(@Valid @RequestBody AccountDto accountDto, HttpServletRequest request) {
 
-        Account account = userService.login(accountDto);
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(accountDto.getEmail(), accountDto.getPassword()));
 
-        HttpSession session = request.getSession();
-
-        session.setAttribute(Sessions.SESSION_ID, accountDto);
-
-        Authentication authentication = new UsernamePasswordAuthenticationToken(account.getName(), null);
         SecurityContextHolder.getContext().setAuthentication(authentication);
+        String jwt = jwtUtils.generateJwtToken(authentication);
 
-        return new RedirectView("/");
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        List<String> roles = userDetails.getAuthorities().stream()
+                .map(item -> item.getAuthority())
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(JwtResponse.builder()
+                                            .jwt(jwt)
+                                            .username(userDetails.getUsername())
+                                            .email(userDetails.getEmail())
+                                            .role(roles)
+                                            .build());
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return null;
     }
 }
