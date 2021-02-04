@@ -56,47 +56,19 @@ dependencies {
 //	implementation 'org.springframework.session:spring-session-data-redis'
 //	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 //	implementation 'io.lettuce:lettuce-core:5.0.3.RELEASE'
-	implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.4.1'
-	compileOnly 'org.projectlombok:lombok'
+	implementation  'com.h2database:h2'
+	implementation 	'org.springdoc:springdoc-openapi-ui:1.4.1'
+	compileOnly 	'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	runtimeOnly 'org.postgresql:postgresql'
+	runtimeOnly 	'org.postgresql:postgresql'
+	implementation 	'io.jsonwebtoken:jjwt-api:0.10.5'
+	implementation 		'io.jsonwebtoken:jjwt-impl:0.10.5'
+	implementation		'io.jsonwebtoken:jjwt-jackson:0.10.5'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 }
-
-def webappDir = "$projectDir/frontend"
-
-// node 버전 및 npm, node 설치파일 저장 디렉토리 명시
-node {
-	version = '14.15.4'
-	download= false
-	workDir = file("${project.buildDir}/nodejs")
-	npmWorkDir = file("${project.buildDir}/npm")
-}
-
-// npm install 과정
-task appNpmInstall(type: NpmTask) {
-	workingDir = file("${project.projectDir}/frontend")
-	args = ["install"]
-}
-
-// npm build
-task npmBuild(type: NpmTask) {
-	workingDir = file("${project.projectDir}/frontend")
-	args = ['run-script', 'build']
-}
-
-// 빌드된 결과 resources로 이동
-task copyWebApp(type: Copy) {
-	from "frontend/build"
-	into 'build/resources/main/static/.'
-}
-
-npmBuild.dependsOn appNpmInstall
-copyWebApp.dependsOn npmBuild
-compileJava.dependsOn copyWebApp
 
 test {
 	useJUnitPlatform()

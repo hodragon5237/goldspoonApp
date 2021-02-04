@@ -1,7 +1,7 @@
 package com.project827.backend.config;
 
-import com.project827.backend.security.CustomAuthenticationProvider;
-import com.project827.backend.service.AccountApiLogicService;
+import com.project827.backend.filter.AuthTokenFilter;
+import com.project827.backend.security.AuthEntryPointJwt;
 import com.project827.backend.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +9,8 @@ import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -20,11 +20,17 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(
+        prePostEnabled = true
+)
 @AllArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    CustomAuthenticationProvider authProvider;
+    private UserService userService;
+
+    @Autowired
+    private AuthEntryPointJwt unauthorizedHandler;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -34,6 +40,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
+    }
+
+    @Bean
+    public AuthTokenFilter authenticationJwtTokenFilter() {
+        return new AuthTokenFilter();
     }
 
     @Override
@@ -59,6 +70,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-            auth.authenticationProvider(authProvider);
+            auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
     }
 }
