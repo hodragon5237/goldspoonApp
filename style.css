@@ -259,12 +259,12 @@ body {
 
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap");
 
-button {
+button#shot {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
 }
-button {
+button#shot {
   /* 생략 */
   margin: 0;
   padding: 0.5rem 1rem;
@@ -287,13 +287,13 @@ button {
 
   transition: 0.5s;
 }
-button:active,
-button:hover,
-button:focus {
+button#shot:active,
+button#shot:hover,
+button#shot:focus {
   background: var(--button-hover-bg-color);
   outline: 0;
 }
-button:disabled {
+button#shot:disabled {
   opacity: 0.5;
 }
 :root {
