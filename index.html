@@ -12,7 +12,6 @@
     <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5feeb9fd50ff91f7"></script>
     <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 </head>
 <body>
@@ -73,53 +72,11 @@
                     <div class="image-title-wrap">
                         <button type="button" onclick="removeUpload()" class="remove-image">다른 사진으로 다시 시도</button>
                     </div>
-                    <!-- <a id="kakao-link-btn" href="javascript:sendLink()" style="text-decoration: none">
-                        <img
-                        src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" width="40" height="40" border="0"
-                        />
-                    </a>
-                    <script type='text/javascript'>
-                    Kakao.init('a1e68ec968e7af64917f2eedd515c9d4');
-
-                    var imgUrl=function(){html2canvas(document.querySelector("#capture_png"),{
-                                height: window.outerHeight + window.innerHeight,
-                                windowHeight: window.outerHeight + window.innerHeight,
-                                scrollY: -window.scrollY}).then(canvas.toDataURL('image/png'));
-                                imgUrl=imgUrl.replace("data:image/png;base64,", "");
-                                console.log(imgUrl);};
-
-                    Kakao.Link.createDefaultButton({
-                        container : '#kakao-link-btn',
-                        objectType : 'feed',
-                        content:{
-                            title: '재미로 보는 관상 테스트',
-                            description: '나의 재물운은 얼마나 될까?',
-                            imageUrl: "./favicon.ico",
-                            link: {
-                                mobileWebUrl: window.location.href,
-                                webUrl: window.location.href
-                            }
-                        },
-                        social: {
-                            likeCount:10,
-                            commentCount: 20,
-                            sharedCount: 30
-                        },
-                        buttons: [
-                            {
-                                title: '웹으로 보기',
-                                link: {
-                                    webUrl:window.location.href
-                                }
-                            }
-                        ]
-                    });
-                    </script> -->
+                    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                    <div class="addthis_inline_share_toolbox"></div>
                     <button id="shot"><img
                         src="./pngIcon.png" width="40" height="40" border="0"
                         /></button>
-                    <!-- Go to www.addthis.com/dashboard to customize your tools -->
-                    <div class="addthis_inline_share_toolbox"></div>
                 </div>
             </div>
             <div class="ad-banner">
@@ -280,9 +237,10 @@
         $(function(){
         $("#shot").on("click", function(){
         // 캡쳐 라이브러리를 통해서 canvas 오브젝트를 받고 이미지 파일로 리턴한다.
-        html2canvas(document.querySelector("#capture_png"),{
+        html2canvas(document.body,{
                                 height: window.outerHeight + window.innerHeight,
-                                windowHeight: window.outerHeight + window.innerHeight}).then(canvas => {
+                                windowHeight: window.outerHeight + window.innerHeight,
+                                scrollY: -window.scrollY}).then(canvas => {
         saveAs(canvas.toDataURL('image/png'),"capture-test.png");
         });
         });
