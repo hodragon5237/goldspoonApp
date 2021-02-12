@@ -9,10 +9,11 @@
     <link rel="stylesheet" href="style.css">
     <title>GoldSpoon</title>
     <!-- Go to www.addthis.com/dashboard to customize your tools -->
-    <!-- <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5feeb9fd50ff91f7"></script> -->
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5feeb9fd50ff91f7"></script>
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 </head>
 <body>
     <div id="_" style="transform-origin: 0px 0px;">
@@ -41,87 +42,95 @@
                 </div>
             </div>
         </nav>
+        <div id="capture_png">
+            <section class="section">
+                <h1 class="title">재물운 테스트</h1>
+                <h2 class="subtitle">내가 타고난 금수저의 기운은?</h2>
+            </section>
 
-        <section class="section">
-            <h1 class="title">재물운 테스트</h1>
-            <h2 class="subtitle">내가 타고난 금수저의 기운은?</h2>
-        </section>
+            <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+            <div class="container file-upload">
+                <div class="image-upload-wrap">
+                    <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
+                    <div class="_image_box">+ image</div>
+                    <div class="drag-text">
+                        <h3 class="mb-5 pb-5 upload-text">얼굴 사진을 업로드 해 주세요!</h3>
+                    </div>
+                </div>
+                <div class="file-upload-content">
+                    <img class="file-upload-image" id="face-image" src="#" alt="your image" />
+                    <div>
+                        <button class="btn btn-primary" type="button" disabled>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            AI가 지금 당신의 관상을 분석하고 있습니다.
+                        </button>
+                    </div>
+                    <p class="result-message"></p>
+                    <div id="label-container"></div>
+                    <div class="horizontal-bar-chart">
+                            <span id="probability-container"></span>
+                    </div>
+                    <div class="image-title-wrap">
+                        <button type="button" onclick="removeUpload()" class="remove-image">다른 사진으로 다시 시도</button>
+                    </div>
+                    <!-- <a id="kakao-link-btn" href="javascript:sendLink()" style="text-decoration: none">
+                        <img
+                        src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" width="40" height="40" border="0"
+                        />
+                    </a>
+                    <script type='text/javascript'>
+                    Kakao.init('a1e68ec968e7af64917f2eedd515c9d4');
 
-        <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-        <div class="container file-upload">
-            <div class="image-upload-wrap">
-                <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
-                <div class="_image_box">+ image</div>
-                <div class="drag-text">
-                    <h3 class="mb-5 pb-5 upload-text">얼굴 사진을 업로드 해 주세요!</h3>
+                    var imgUrl=function(){html2canvas(document.querySelector("#capture_png"),{
+                                height: window.outerHeight + window.innerHeight,
+                                windowHeight: window.outerHeight + window.innerHeight,
+                                scrollY: -window.scrollY}).then(canvas.toDataURL('image/png'));
+                                imgUrl=imgUrl.replace("data:image/png;base64,", "");
+                                console.log(imgUrl);};
+
+                    Kakao.Link.createDefaultButton({
+                        container : '#kakao-link-btn',
+                        objectType : 'feed',
+                        content:{
+                            title: '재미로 보는 관상 테스트',
+                            description: '나의 재물운은 얼마나 될까?',
+                            imageUrl: "./favicon.ico",
+                            link: {
+                                mobileWebUrl: window.location.href,
+                                webUrl: window.location.href
+                            }
+                        },
+                        social: {
+                            likeCount:10,
+                            commentCount: 20,
+                            sharedCount: 30
+                        },
+                        buttons: [
+                            {
+                                title: '웹으로 보기',
+                                link: {
+                                    webUrl:window.location.href
+                                }
+                            }
+                        ]
+                    });
+                    </script> -->
+                    <button id="shot"><img
+                        src="./pngIcon.png" width="40" height="40" border="0"
+                        /></button>
+                    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                    <div class="addthis_inline_share_toolbox"></div>
                 </div>
             </div>
-            <div class="file-upload-content">
-                <img class="file-upload-image" id="face-image" src="#" alt="your image" />
-                <div>
-                    <button class="btn btn-primary" type="button" disabled>
-                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                        AI가 지금 당신의 관상을 분석하고 있습니다.
-                    </button>
-                </div>
-                <p class="result-message"></p>
-                <div id="label-container"></div>
-                <div class="horizontal-bar-chart">
-                        <span id="probability-container"></span>
-                </div>
-                <div class="image-title-wrap">
-                    <button type="button" onclick="removeUpload()" class="remove-image">다른 사진으로 다시 시도</button>
-                </div>
-                <a id="kakao-link-btn" href="javascript:sendLink()">
-                    <img
-                      src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" width="32" height="32" border="0"
-                    />
-                </a>
-                <script type='text/javascript'>
-                Kakao.init('a1e68ec968e7af64917f2eedd515c9d4');
-                Kakao.Link.createScrapButton({
-                    container: '#kakao-link-btn',
-                    requestUrl: location.href
-                })  
-                // Kakao.Link.createDefaultButton({
-                //     container : '#kakao-link-btn',
-                //     objectType : 'feed',
-                //     content:{
-                //         title: '재미로 보는 관상 테스트',
-                //         description: '나의 재물운은 얼마나 될까?',
-                //         imageUrl: '/favicon.ico',
-                //         link: {
-                //             mobileWebUrl: window.location.href,
-                //             webUrl: window.location.href
-                //         }
-                //     },
-                //     social: {
-                //         likeCount:10,
-                //         commentCount: 20,
-                //         sharedCount: 30
-                //     },
-                //     buttons: [
-                //         {
-                //             title: '웹으로 보기',
-                //             link: {
-                //                 webUrl:window.location.href
-                //             }
-                //         }
-                //     ]
-                // });
-                </script>
-                <!-- Go to www.addthis.com/dashboard to customize your tools -->
-                <!-- <div class="addthis_inline_share_toolbox"></div> -->
+            <div class="ad-banner">
+                <ins class="kakao_ad_area" style="display:none;" 
+                    data-ad-unit    = "DAN-bnyFAjUAwJde9cuJ" 
+                    data-ad-width   = "320" 
+                    data-ad-height  = "100"></ins> 
             </div>
+            <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+            <div class="copy_right">© 2021. 827Project all rights reserved.</div>
         </div>
-        <div class="ad-banner">
-            <ins class="kakao_ad_area" style="display:none;" 
-                data-ad-unit    = "DAN-bnyFAjUAwJde9cuJ" 
-                data-ad-width   = "320" 
-                data-ad-height  = "100"></ins> 
-        </div>
-        <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
-        <div class="copy_right">© 2021. 827Project all rights reserved.</div>
     </div>
     <div id="disqus_thread"></div>
     <script>
@@ -266,6 +275,32 @@
             $('#label-container').html("재물운");
             $('#probability-container').attr('style', "width:"+prediction[0].probability.toFixed(2)*100+"%");
         }
+    </script>
+    <script>
+        $(function(){
+        $("#shot").on("click", function(){
+        // 캡쳐 라이브러리를 통해서 canvas 오브젝트를 받고 이미지 파일로 리턴한다.
+        html2canvas(document.querySelector("#capture_png"),{
+                                height: window.outerHeight + window.innerHeight,
+                                windowHeight: window.outerHeight + window.innerHeight,
+                                scrollY: -window.scrollY}).then(canvas => {
+        saveAs(canvas.toDataURL('image/png'),"capture-test.png");
+        });
+        });
+        function saveAs(uri, filename) {
+            // 캡쳐된 파일을 이미지 파일로 내보낸다.
+            var link = document.createElement('a');
+            if (typeof link.download === 'string') {
+                link.href = uri;
+                link.download = filename;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            } else {
+                window.open(uri);
+            }
+        }
+        });
     </script>
 </body>
 <!-- Copyright (c) 2020 by Aaron Vanston (https://codepen.io/aaronvanston/pen/yNYOXR)
