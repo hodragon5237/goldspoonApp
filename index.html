@@ -282,8 +282,7 @@
         // 캡쳐 라이브러리를 통해서 canvas 오브젝트를 받고 이미지 파일로 리턴한다.
         html2canvas(document.querySelector("#capture_png"),{
                                 height: window.outerHeight + window.innerHeight,
-                                windowHeight: window.outerHeight + window.innerHeight,
-                                scrollY: -window.scrollY}).then(canvas => {
+                                windowHeight: window.outerHeight + window.innerHeight}).then(canvas => {
         saveAs(canvas.toDataURL('image/png'),"capture-test.png");
         });
         });
