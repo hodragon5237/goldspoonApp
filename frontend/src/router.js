@@ -2,7 +2,9 @@ import Vue from "vue";
 import Router from "vue-router";
 import AppHeader from "./layout/AppHeader";
 import AppFooter from "./layout/AppFooter";
+import Starter from "./views/Starter.vue";
 import Components from "./views/Components.vue";
+import GoldSpoon from "./views/components/Goldspoon/Goldspoon.vue";
 import Landing from "./views/Landing.vue";
 import Login from "./views/Login.vue";
 import Register from "./views/Register.vue";
@@ -15,10 +17,10 @@ export default new Router({
   routes: [
     {
       path: "/",
-      name: "components",
+      name: "starter",
       components: {
         header: AppHeader,
-        default: Components,
+        default: Starter,
         footer: AppFooter
       }
     },
@@ -55,6 +57,15 @@ export default new Router({
       components: {
         header: AppHeader,
         default: Profile,
+        footer: AppFooter
+      }
+    },
+    {
+      path: "/goldspoon",
+      name: "goldspoon",
+      components: {
+        header: AppHeader,
+        default: GoldSpoon,
         footer: AppFooter
       }
     }
