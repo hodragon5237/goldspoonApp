@@ -6,11 +6,23 @@
   </div>
 </template>
 <script>
-import TheLayout from '@/layouts/TheLayout';
+
+import TheLayout from '@/layouts/TheLayout'
 
 export default {
     name: 'App',
     components: { TheLayout },
+    computed: {
+      currentUser () {
+        return this.$store.state.auth.user
+      }
+    },
+    methods: {
+      logOut () {
+        this.$store.dispatch('auth/logout')
+        this.$router.push('/')
+      }
+    }
 }
 </script>
 

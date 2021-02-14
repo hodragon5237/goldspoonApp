@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import Login from '@/views/Login/Login'
 import Register from '@/views/Register/Register'
+import Goldspoon from '@/views/Goldspoon/Goldspoon'
 
 Vue.use(Router)
 
@@ -17,13 +18,17 @@ export default new Router({
     {
       path: "/login",
       name: "login",
-      components: Login
+      component: Login
     },
     {
       path: "/register",
       name: "register",
-      components: Register,
-      meta: { unauthorized: true }
+      component: Register
+    },
+    {
+      path: "/goldspoon",
+      name: "goldspoon",
+      component: Goldspoon
     },
   ]
 })

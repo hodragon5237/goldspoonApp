@@ -1,15 +1,11 @@
 <template>
     <header class="header-global">
         <base-nav class="navbar-main" transparent type="" effect="light" expand>
-            <router-link slot="brand" class="navbar-brand mr-lg-5" to="/">
-                <img src="img/brand/white.png" alt="logo">
-            </router-link>
-
             
             <!-- 메뉴 layout -->
             <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
                 <base-dropdown tag="li" class="nav-item">
-                    <a slot="title" href="#" class="nav-link" data-toggle="dropdown" role="button">
+                    <a slot="title" class="nav-link" data-toggle="dropdown" role="button">
                         <i class="ni ni-collection d-lg-none"></i>
                         <span class="nav-link-inner--text">Examples</span>
                     </a>
@@ -33,8 +29,13 @@
 </template>
 <script>
 
+import BaseNav from "@/components/Base/BaseNav";
+import BaseDropdown from "@/components/Base/BaseDropdown";
+
 export default {
   components: {
+      BaseNav,
+      BaseDropdown
   }
 };
 </script>

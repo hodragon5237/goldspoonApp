@@ -1,65 +1,141 @@
 <template>
-    <section class="section section-shaped section-lg my-0">
-        <div class="shape shape-style-1 bg-gradient-default">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
+  <div class="col-md-12">
+    <div class="card card-container">
+      <img
+        id="profile-img"
+        src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+        class="profile-img-card"
+      />
+      <form name="form" @submit.prevent="handleRegister">
+        <div v-if="!successful">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input
+              type="text"
+              class="form-control"
+              name="username"
+              v-model="user.username"
+            />
+            <!-- <div
+              class="alert-danger"
+              v-if="submitted && errors.has('username')"
+            >{{errors.first('username')}}</div> -->
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              name="email"
+              v-model="user.email"
+            />
+            <!-- <div
+              class="alert-danger"
+              v-if="submitted && errors.has('email')"
+            >{{errors.first('email')}}</div> -->
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              name="password"
+              v-model="user.password"
+            />
+            <!-- <div
+              class="alert-danger"
+              v-if="submitted && errors.has('password')"
+            >{{errors.first('password')}}</div> -->
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary btn-block">Sign Up</button>
+          </div>
         </div>
-        <div class="container pt-lg-md">
-            <div class="row justify-content-center">
-                <div class="col-lg-5">
-                    <card type="secondary" shadow
-                          header-classes="bg-white pb-5"
-                          body-classes="px-lg-5 py-lg-5"
-                          class="border-0">
-                        <template>
-                            <div class="text-center text-muted mb-4">
-                                <small>Or sign up with credentials</small>
-                            </div>
-                            <form role="form">
-                                <base-input alternative
-                                            class="mb-3"
-                                            placeholder="Name"
-                                            addon-left-icon="ni ni-hat-3">
-                                </base-input>
-                                <base-input alternative
-                                            class="mb-3"
-                                            placeholder="Email"
-                                            addon-left-icon="ni ni-email-83">
-                                </base-input>
-                                <base-input alternative
-                                            type="password"
-                                            placeholder="Password"
-                                            addon-left-icon="ni ni-lock-circle-open">
-                                </base-input>
-                                <div class="text-muted font-italic">
-                                    <small>password strength:
-                                        <span class="text-success font-weight-700">strong</span>
-                                    </small>
-                                </div>
-                                <base-checkbox>
-                                    <span>I agree with the
-                                        <a href="#">Privacy Policy</a>
-                                    </span>
-                                </base-checkbox>
-                                <div class="text-center">
-                                    <base-button type="primary" class="my-4">Create account</base-button>
-                                </div>
-                            </form>
-                        </template>
-                    </card>
-                </div>
-            </div>
-        </div>
-    </section>
+      </form>
+
+      <div
+        class="alert"
+        :class="successful ? 'alert-success' : 'alert-danger'"
+        v-if="message"
+      >{{message}}</div>
+    </div>
+  </div>
 </template>
+
 <script>
-export default {};
+import User from '@/models/user'
+
+export default {
+  name: 'register',
+  computed: {
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn
+    }
+  },
+  data() {
+    return {
+      user: new User('', '', ''),
+      submitted: false,
+      successful: false,
+      message: ''
+    }
+  },
+  mounted() {
+    // if (this.loggedIn) {
+    //   this.$router.push('/')
+    // }
+  },
+  methods: {
+    handleRegister() {
+      this.message = ''
+      this.submitted = true
+      this.$store.dispatch('auth/register', this.user).then(
+        data => {
+            this.message = data.message
+            this.successful = true
+        },
+        error => {
+            this.message = error.message
+            this.successful = false
+        }).then(
+            this.$router.push('/')
+        )
+    }
+  }
+}
 </script>
-<style>
+
+<style scoped>
+label {
+  display: block;
+  margin-top: 10px;
+}
+
+.card-container.card {
+  max-width: 350px !important;
+  padding: 40px 40px;
+}
+
+.card {
+  background-color: #f7f7f7;
+  padding: 20px 25px 30px;
+  margin: 0 auto 25px;
+  margin-top: 50px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.profile-img-card {
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 10px;
+  display: block;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+}
 </style>

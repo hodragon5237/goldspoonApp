@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("/api/account")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:8080")
 public class AccountApiController extends CrudController<AccountApiRequest, AccountApiResponse, Account>{
     
 }

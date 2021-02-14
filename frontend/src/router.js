@@ -3,7 +3,6 @@ import Router from "vue-router";
 import AppHeader from "./layout/AppHeader";
 import AppFooter from "./layout/AppFooter";
 import Starter from "./views/Starter.vue";
-import Components from "./views/Components.vue";
 import GoldSpoon from "./views/components/Goldspoon/Goldspoon.vue";
 import Landing from "./views/Landing.vue";
 import Login from "./views/Login.vue";

@@ -15,13 +15,10 @@ export default {
         DefaultLayout,
         MobileLayout,
     },
-    setup(props, { root }){
-        const layout = computed(() => root.$route.meta.layout || 'DefaultLayout' );
-
-        console.log(layout);
-
-        return {
-            layout
+    computed: {
+        layout() {
+            const layout = this.$route.meta.layout || 'DefaultLayout';
+            return () => import(`@/layouts/${layout}.vue`)
         }
     }
 }
