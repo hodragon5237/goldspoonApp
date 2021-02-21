@@ -9,6 +9,7 @@ import com.project827.backend.service.UserService;
 import com.project827.backend.utils.JwtUtils;
 import com.project827.backend.utils.Sessions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -43,8 +44,14 @@ public class UserController implements UserDetailsService {
     @PostMapping("/login")
     public ResponseEntity loginChecker(@Valid @RequestBody AccountDto accountDto, HttpServletRequest request) {
 
+        Account account = userService.login(accountDto);
+
+        if (account == null) {
+            return ResponseEntity.of(null);
+        }
+
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(accountDto.getEmail(), accountDto.getPassword()));
+                new UsernamePasswordAuthenticationToken(accountDto.getUsername(), accountDto.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);

@@ -33,10 +33,10 @@ public class UserService implements UserDetailsService {
 
     public Account login(AccountDto request) {
 
-        Optional<Account> optional = accountRepository.findByEmail(request.getEmail());
+        Optional<Account> optional = accountRepository.findByName(request.getUsername());
 
         if (optional.isEmpty()) {
-            throw new UsernameNotFoundException(request.getEmail());
+            throw new UsernameNotFoundException(request.getUsername());
         } else {
             Account account = optional.get();
 

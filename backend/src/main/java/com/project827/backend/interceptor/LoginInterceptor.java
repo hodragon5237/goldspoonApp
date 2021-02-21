@@ -19,7 +19,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         AccountDto accountDto = (AccountDto) httpSession.getAttribute(Sessions.SESSION_ID);
 
         if (accountDto == null) {
-//            response.sendRedirect("/login");
+            //response.sendRedirect("/login");
             return false;
         } else {
             return true;
