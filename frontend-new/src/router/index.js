@@ -28,7 +28,8 @@ export default new Router({
     {
       path: "/goldspoon",
       name: "goldspoon",
-      component: Goldspoon
+      component: Goldspoon,
+      meta: { unauthorized: true }
     },
   ]
 })
