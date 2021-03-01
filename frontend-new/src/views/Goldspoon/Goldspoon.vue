@@ -15,7 +15,7 @@
         </div>
 
         <div class="file-upload-content">
-            <img class="file-upload-image" id="face-image" src="#" alt="your image" />
+            <img class="file-upload-image" ref="faceImage" :src="fileSrc" alt="your image" />
 
             <p class="result-message"></p>
             <div id="label-container"></div>
@@ -31,8 +31,10 @@
 
     
 </template>
+
 <script>
 import Spinner from '../../components/custom/Spinner';
+import ModelService from '../../services/model-service';
 
 export default {
   components: { Spinner },
@@ -42,6 +44,7 @@ export default {
     data() {
         return {
             file: null,
+            fileSrc: "#",
             image: null,
             isLoading: false,
             loadingMsg: "관상 분석중.."
@@ -51,8 +54,30 @@ export default {
     methods: {
         readURL() {
             this.file = this.$refs.file.files[0];
-            console.log(this.file);
-            this.toggleSpinner(true);
+            
+            if (this.file) {
+                var reader = new FileReader();
+
+                reader.onload = (e) => {
+                    this.fileSrc = e.target.result;
+                }
+
+                reader.readAsDataURL(this.file);
+                console.log(this.fileSrc);
+
+                this.toggleSpinner(true);
+
+                var image = this.$refs.faceImage;
+
+                const modelService = new ModelService();
+
+                modelService.predict(image).then(
+                    (resultMsg) => {
+                        console.log(resultMsg);
+                        this.toggleSpinner(false);
+                    }
+                )
+            }
         },
 
         toggleSpinner(status) {
