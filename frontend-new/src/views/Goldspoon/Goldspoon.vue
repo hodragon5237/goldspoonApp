@@ -17,7 +17,7 @@
         <div class="file-upload-content">
             <img class="file-upload-image" ref="faceImage" :src="fileSrc" alt="your image" />
 
-            <p class="result-message"></p>
+            <p class="result-message">{{ resultMsg }}</p>
             <div id="label-container"></div>
             <div class="horizontal-bar-chart">
                 <span id="probability-container"></span>
@@ -47,7 +47,8 @@ export default {
             fileSrc: "#",
             image: null,
             isLoading: false,
-            loadingMsg: "관상 분석중.."
+            loadingMsg: "관상 분석중..",
+            resultMsg: ""
         }
     },
 
@@ -74,6 +75,7 @@ export default {
                 modelService.predict(image).then(
                     (resultMsg) => {
                         console.log(resultMsg);
+                        this.resultMsg = resultMsg;
                         this.toggleSpinner(false);
                     }
                 )
